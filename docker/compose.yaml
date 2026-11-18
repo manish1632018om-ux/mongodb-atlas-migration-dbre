@@ -1,0 +1,43 @@
+name: atlas-migration-lab
+
+services:
+  mongo1:
+    image: mongo:8.0
+    hostname: mongo1
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    ports:
+      - "127.0.0.1:27117:27017"
+    volumes:
+      - mongo1_data:/data/db
+    networks:
+      - mongo-net
+    restart: unless-stopped
+
+  mongo2:
+    image: mongo:8.0
+    hostname: mongo2
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    volumes:
+      - mongo2_data:/data/db
+    networks:
+      - mongo-net
+    restart: unless-stopped
+
+  mongo3:
+    image: mongo:8.0
+    hostname: mongo3
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    volumes:
+      - mongo3_data:/data/db
+    networks:
+      - mongo-net
+    restart: unless-stopped
+
+networks:
+  mongo-net:
+    driver: bridge
+
+volumes:
+  mongo1_data:
+  mongo2_data:
+  mongo3_data:

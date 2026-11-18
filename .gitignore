@@ -1,0 +1,40 @@
+# Credentials and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+*credentials*
+*secret*
+
+# MongoDB backups and exports
+backup/
+backups/
+*.archive
+*.archive.gz
+*.bson
+*.bson.gz
+*.metadata.json
+*.dump
+*.gz
+
+# Database storage
+data/
+dbdata/
+mongodb-data/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# IDE
+.vscode/
+.idea/
