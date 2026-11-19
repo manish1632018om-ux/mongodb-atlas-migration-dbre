@@ -1,0 +1,27 @@
+
+name: MongoDB DBRE CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  bash-validation:
+    name: Validate Bash Scripts
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check Bash syntax
+        shell: bash
+        run: |
+          set -e
+          for script in scripts/*.sh; do
+            echo "Checking $script"
+            bash -n "$script"
+          done
+          echo "All Bash syntax checks PASSED"
