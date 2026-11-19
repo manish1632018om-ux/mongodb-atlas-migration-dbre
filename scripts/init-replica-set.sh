@@ -11,6 +11,7 @@ for node in "${NODES[@]}"; do
   ready=false
 
   for attempt in {1..30}; do
+    echo "Checking $node readiness (attempt $attempt/30)..."
     if timeout 10s sudo -n docker exec "$container" \
       mongosh --quiet --eval 'print(db.adminCommand({ping:1}).ok)' \
       2>/dev/null | grep -qx 1; then

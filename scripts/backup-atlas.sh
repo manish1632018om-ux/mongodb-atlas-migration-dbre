@@ -11,6 +11,7 @@ if [[ ! -f .env ]]; then
 fi
 
 set -a
+# shellcheck disable=SC1091
 source .env
 set +a
 
@@ -25,6 +26,7 @@ BACKUP_PATH="$(cd "$BACKUP_DIR" && pwd)"
 ARCHIVE="${SOURCE_DATABASE}.archive.gz"
 
 read -rsp "Enter Atlas database password: " ATLAS_PASSWORD
+export ATLAS_PASSWORD
 echo
 
 echo "Starting Atlas backup for database: $SOURCE_DATABASE"

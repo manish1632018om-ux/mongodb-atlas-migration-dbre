@@ -25,3 +25,12 @@ jobs:
             bash -n "$script"
           done
           echo "All Bash syntax checks PASSED"
+
+      - name: Install ShellCheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+
+      - name: Run ShellCheck linting
+        shell: bash
+        run: |
+          shellcheck scripts/*.sh
+          echo "All ShellCheck lint checks PASSED"
