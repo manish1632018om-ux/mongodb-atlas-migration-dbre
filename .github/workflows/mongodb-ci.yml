@@ -34,3 +34,21 @@ jobs:
         run: |
           shellcheck scripts/*.sh
           echo "All ShellCheck lint checks PASSED"
+
+      - name: Validate test startup script
+        run: |
+          bash -n tests/start-replica-set.sh
+          shellcheck tests/start-replica-set.sh
+
+      - name: Start MongoDB replica set
+        run: bash tests/start-replica-set.sh
+
+      - name: Run MongoDB integration tests
+        run: |
+          docker exec -i atlas-migration-lab-mongo1-1 \
+            mongosh --quiet --file /dev/stdin \
+            < tests/replica-set-test.js
+
+      - name: Clean up MongoDB containers
+        if: always()
+        run: docker compose -f docker/compose.yaml down -v
